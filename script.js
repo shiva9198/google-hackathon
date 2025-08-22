@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Lucide Icons
   lucide.createIcons();
 
-  // --- DOM Element Selectors ---
+  // DOM Element Selectors
   const ui = {
     themeSwitcher: document.getElementById('theme-switcher'),
     sidebar: document.querySelector('.sidebar'),
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // --- THEME MANAGEMENT ---
+  // THEME MANAGEMENT
   const THEME_KEY = 'gemini-chat-theme';
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(THEME_KEY, mode);
   }
 
-  // --- NAVIGATION / PAGE SWITCHING ---
+  // NAVIGATION / PAGE SWITCHING
   function switchPage(pageId) {
     ui.pages.forEach(page => page.classList.toggle('active', page.id === `page-${pageId}`));
     ui.pages.forEach(page => page.classList.toggle('hidden', page.id !== `page-${pageId}`));
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // --- CHAT FUNCTIONALITY ---
+  // CHAT FUNCTIONALITY
   function addMessage(sender, text) {
     const messageEl = document.createElement('div');
     messageEl.className = `chat-message ${sender}`;
@@ -81,14 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   }
 
-  // --- FILE HANDLING ---
+  // FILE HANDLING
   function handleFiles(files) {
     [...files].forEach(file => {
       addMessage('user', `📎 Attached: ${file.name} (${Math.round(file.size/1024)} KB)`);
     });
   }
 
-  // --- EVENT LISTENERS ---
+  // EVENT LISTENERS
   // Theme switcher
   ui.themeSwitcher.addEventListener('click', (e) => {
     const button = e.target.closest('button');
@@ -137,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
     handleFiles(e.dataTransfer.files);
   });
 
-  // --- INITIALIZATION ---
+  // INITIALIZATION
   applyTheme(localStorage.getItem(THEME_KEY) || 'system');
   switchPage('chat');
 });
+
