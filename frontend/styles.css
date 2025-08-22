@@ -1,6 +1,6 @@
-/* ==========================================================================
+  /*
    1. Variables & Global Styles
-   ========================================================================== */
+   */
 
 :root {
   --bg-start-light: #ffffff;
@@ -43,9 +43,9 @@ body.dark {
   background: linear-gradient(135deg, var(--bg-start-dark), var(--bg-mid-dark), var(--bg-end-dark));
 }
 
-/* ==========================================================================
+/*
    2. App Layout
-   ========================================================================== */
+  */
 
 .app-layout {
   display: flex;
@@ -79,9 +79,9 @@ body.dark .sidebar {
   height: 100vh;
 }
 
-/* ==========================================================================
+/* 
    3. Sidebar Components
-   ========================================================================== */
+   */
 
 .brand {
   display: flex;
@@ -160,9 +160,9 @@ body.dark .nav-link:hover, body.dark .nav-link.active {
 body.dark .user-email { color: var(--muted-dark); }
 
 
-/* ==========================================================================
+/*
    4. Settings Dropdown Menu
-   ========================================================================== */
+ */
 
 .settings-menu {
   position: relative;
@@ -220,9 +220,9 @@ body.dark .settings-dropdown a:hover {
   background: rgba(0,0,0,0.2);
 }
 
-/* ==========================================================================
+/*
    5. Main Content Area
-   ========================================================================== */
+  */
 
 .content-header {
   display: flex;
@@ -235,11 +235,10 @@ body.dark .settings-dropdown a:hover {
 #page-title {
   margin: 0;
   font-size: 20px;
-  margin-right: auto; /* Pushes other items to the right */
-}
+  margin-right: auto; 
 
 #menu-btn {
-  display: none; /* Hidden on desktop */
+  display: none; 
 }
 
 .page {
@@ -257,9 +256,9 @@ body.dark .settings-dropdown a:hover {
   display: flex;
 }
 
-/* ==========================================================================
+/* 
    6. Chat Interface
-   ========================================================================== */
+*/
 
 .chat-history {
   flex-grow: 1;
@@ -268,11 +267,11 @@ body.dark .settings-dropdown a:hover {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* --- ENHANCEMENT: Smooth scrolling for new messages --- */
+ 
   scroll-behavior: smooth;
 }
 
-/* --- ENHANCEMENT: Themed scrollbar --- */
+
 .chat-history::-webkit-scrollbar {
   width: 8px;
 }
@@ -334,9 +333,9 @@ body.dark .chat-form {
   border-top: 1px solid var(--glass-border-dark);
 }
 
-/* ==========================================================================
+/*
    7. Other Pages (History & Settings)
-   ========================================================================== */
+ */
 
 .history-list {
   list-style: none;
@@ -371,9 +370,9 @@ body.dark .settings-section {
   justify-content: flex-start;
 }
 
-/* ==========================================================================
+/*
    8. Generic Components (Buttons, Inputs)
-   ========================================================================== */
+ */
 
 .btn {
   display: inline-flex;
@@ -415,7 +414,7 @@ body.dark .btn {
   backdrop-filter: blur(10px);
   color: inherit;
   outline: none;
-  font-size: 16px; /* Prevents iOS zoom on focus */
+  font-size: 16px; 
   transition: border 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -428,7 +427,7 @@ body.dark .input {
   border-color: var(--accent-dark);
 }
 
-/* --- ENHANCEMENT: Accessibility focus ring --- */
+
 *:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
@@ -441,9 +440,9 @@ body.dark .input {
 }
 
 
-/* ==========================================================================
+/*
    9. Utilities & Animations
-   ========================================================================== */
+*/
 
 .gap-8 {
   gap: 8px;
@@ -464,9 +463,9 @@ body.dark .input {
   }
 }
 
-/* ==========================================================================
+/*
    10. Responsive Design
-   ========================================================================== */
+*/
 
 @media (max-width: 768px) {
   .sidebar {
@@ -479,17 +478,18 @@ body.dark .input {
     transform: translateX(-100%);
   }
 
-  /* Add class with JS to show sidebar on mobile */
+ 
   .sidebar.open {
     transform: translateX(0);
   }
 
   #menu-btn {
     display: inline-flex;
-    z-index: 1; /* Keep it above other content */
+    z-index: 1;
   }
 
   .content {
     padding: 12px;
   }
+
 }
