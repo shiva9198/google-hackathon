@@ -1,0 +1,495 @@
+/* ==========================================================================
+   1. Variables & Global Styles
+   ========================================================================== */
+
+:root {
+  --bg-start-light: #ffffff;
+  --bg-mid-light: #ffb3b3;
+  --bg-end-light: #ffd6d6;
+  --bg-start-dark: #000000;
+  --bg-mid-dark: #760000;
+  --bg-end-dark: #000000;
+  --text-light: #0f172a;
+  --text-dark: #e5e7eb;
+  --muted-light: #475569;
+  --muted-dark: #94a3b8;
+  --card-bg-light: rgba(255, 255, 255, 0.28);
+  --card-bg-dark: rgba(10, 10, 10, 0.28);
+  --glass-border-light: rgba(255, 255, 255, 0.35);
+  --glass-border-dark: rgba(255, 255, 255, 0.12);
+  --accent-light: #ef4444;
+  --accent-dark: #f87171;
+  --focus-ring: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text-light);
+  background: linear-gradient(135deg, var(--bg-start-light), var(--bg-mid-light), var(--bg-end-light));
+  overflow: hidden;
+}
+
+body.dark {
+  color: var(--text-dark);
+  background: linear-gradient(135deg, var(--bg-start-dark), var(--bg-mid-dark), var(--bg-end-dark));
+}
+
+/* ==========================================================================
+   2. App Layout
+   ========================================================================== */
+
+.app-layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--card-bg-light);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-right: 1px solid var(--glass-border-light);
+  transition: transform 0.3s ease;
+}
+
+body.dark .sidebar {
+  background: var(--card-bg-dark);
+  border-right: 1px solid var(--glass-border-dark);
+}
+
+.content {
+  flex-grow: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ==========================================================================
+   3. Sidebar Components
+   ========================================================================== */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+#logo {
+  color: var(--accent-dark);
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.badge {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border-dark);
+  opacity: 0.9;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--muted-light);
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+body.dark .nav-link { color: var(--muted-dark); }
+
+
+.nav-link:hover, .nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+}
+
+body.dark .nav-link:hover, body.dark .nav-link.active {
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text-dark);
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.user-email {
+  font-size: 12px;
+  color: var(--muted-light);
+}
+body.dark .user-email { color: var(--muted-dark); }
+
+
+/* ==========================================================================
+   4. Settings Dropdown Menu
+   ========================================================================== */
+
+.settings-menu {
+  position: relative;
+}
+
+.settings-dropdown {
+  position: absolute;
+  bottom: 110%;
+  right: 0;
+  width: 180px;
+  background: var(--card-bg-light);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border-light);
+  border-radius: 12px;
+  padding: 8px;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  /* --- ENHANCEMENT: Smoother dropdown animation --- */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+/* Add a class (e.g., 'active') with JS to show the dropdown */
+.settings-dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+
+body.dark .settings-dropdown {
+  background: var(--card-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+.settings-dropdown a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-light);
+  font-size: 14px;
+}
+body.dark .settings-dropdown a { color: var(--text-dark); }
+
+.settings-dropdown a:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+body.dark .settings-dropdown a:hover {
+  background: rgba(0,0,0,0.2);
+}
+
+/* ==========================================================================
+   5. Main Content Area
+   ========================================================================== */
+
+.content-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+#page-title {
+  margin: 0;
+  font-size: 20px;
+  margin-right: auto; /* Pushes other items to the right */
+}
+
+#menu-btn {
+  display: none; /* Hidden on desktop */
+}
+
+.page {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.page.active {
+  display: flex;
+}
+
+/* ==========================================================================
+   6. Chat Interface
+   ========================================================================== */
+
+.chat-history {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 0 10px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* --- ENHANCEMENT: Smooth scrolling for new messages --- */
+  scroll-behavior: smooth;
+}
+
+/* --- ENHANCEMENT: Themed scrollbar --- */
+.chat-history::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-history::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-history::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 10px;
+}
+body.dark .chat-history::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.chat-message {
+  display: flex;
+  max-width: 80%;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+}
+
+.chat-message.ai {
+  align-self: flex-start;
+}
+
+.message-content {
+  padding: 12px 16px;
+  border-radius: 18px;
+  line-height: 1.5;
+}
+
+.chat-message.user .message-content {
+  background: var(--accent-dark);
+  color: #000;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message.ai .message-content {
+  background: var(--card-bg-light);
+  border: 1px solid var(--glass-border-light);
+  border-bottom-left-radius: 4px;
+}
+
+body.dark .chat-message.ai .message-content {
+  background: var(--card-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--glass-border-light);
+}
+
+body.dark .chat-form {
+  border-top: 1px solid var(--glass-border-dark);
+}
+
+/* ==========================================================================
+   7. Other Pages (History & Settings)
+   ========================================================================== */
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.history-list li {
+  padding: 12px;
+  border-bottom: 1px solid var(--glass-border-light);
+}
+
+body.dark .history-list li {
+  border-bottom: 1px solid var(--glass-border-dark);
+}
+
+.settings-section {
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--card-bg-light);
+  border: 1px solid var(--glass-border-light);
+  margin-top: 16px;
+}
+
+body.dark .settings-section {
+  background: var(--card-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+.settings-section #theme-switcher {
+  margin-top: 12px;
+  justify-content: flex-start;
+}
+
+/* ==========================================================================
+   8. Generic Components (Buttons, Inputs)
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-weight: 600;
+  border: 1px solid var(--glass-border-light);
+  background: var(--card-bg-light);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition: all 0.18s ease;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent; /* For mobile */
+}
+
+body.dark .btn {
+  background: var(--card-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn.icon {
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.input {
+  width: 100%;
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border-light);
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  color: inherit;
+  outline: none;
+  font-size: 16px; /* Prevents iOS zoom on focus */
+  transition: border 0.15s ease, box-shadow 0.15s ease;
+}
+
+body.dark .input {
+  background: rgba(0,0,0,0.2);
+  border-color: var(--glass-border-dark);
+}
+
+.input:focus {
+  border-color: var(--accent-dark);
+}
+
+/* --- ENHANCEMENT: Accessibility focus ring --- */
+*:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(248, 113, 113, 0.4);
+  border-radius: 6px; /* Match outline radius */
+}
+/* Remove default outline when focus-visible is supported */
+.input:focus {
+  outline: none;
+}
+
+
+/* ==========================================================================
+   9. Utilities & Animations
+   ========================================================================== */
+
+.gap-8 {
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==========================================================================
+   10. Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    box-shadow: 0 0 40px rgba(0,0,0,0.2);
+    transform: translateX(-100%);
+  }
+
+  /* Add class with JS to show sidebar on mobile */
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  #menu-btn {
+    display: inline-flex;
+    z-index: 1; /* Keep it above other content */
+  }
+
+  .content {
+    padding: 12px;
+  }
+}

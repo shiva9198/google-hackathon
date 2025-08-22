@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TrueLens Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <nav class="sidebar">
+      <div class="sidebar-top">
+        <div class="brand">
+          <span id="logo">TrueLens</span>
+        </div>
+        <a href="#chat" class="nav-link active" data-page="chat">
+          <i data-lucide="message-circle-plus"></i>
+          <span>New Chat</span>
+        </a>
+        <a href="#history" class="nav-link" data-page="history">
+          <i data-lucide="history"></i>
+          <span>History</span>
+        </a>
+      </div>
+      <div class="sidebar-bottom">
+        <a href="#settings" class="nav-link" data-page="settings">
+          <i data-lucide="settings"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="content">
+      <header class="content-header">
+        <button class="btn icon" id="menu-btn"><i data-lucide="menu"></i></button>
+        <h1 id="page-title">Welcome!</h1>
+      </header>
+
+      <!-- CHAT PAGE -->
+      <div class="page active" id="page-chat">
+        <div class="chat-history" id="chat-history">
+          <div class="chat-message ai">
+              <div class="message-content">
+                <p>Hello! How can I help you today? You can ask me questions, paste a URL, or upload media for analysis.</p>
+              </div>
+            </div>
+        </div>
+
+        <!-- Chat form with file upload -->
+        <form class="chat-form" id="chat-form">
+          <!-- Hidden file input -->
+          <input type="file" id="fileInput" multiple hidden>
+
+          <!-- Attach button -->
+          <button type="button" class="btn icon" id="attachBtn" title="Upload Media">
+            <i data-lucide="paperclip"></i>
+          </button>
+
+          <!-- Chat input -->
+          <input type="text" id="chat-input" class="input" placeholder="Ask me anything..." autocomplete="off">
+
+          <!-- Send button -->
+          <button type="submit" class="btn icon" title="Send"><i data-lucide="send"></i></button>
+        </form>
+
+        <!-- Drag & Drop Zone -->
+        <div id="dropZone" class="drop-zone">Drop files here...</div>
+      </div>
+
+      <!-- HISTORY PAGE -->
+      <div class="page hidden" id="page-history">
+        <h2>Your History</h2>
+        <p class="muted">This is where a list of your past conversations will appear.</p>
+        <ul class="history-list">
+          <!--  <li><span>Aug 21, 2025</span> - Analysis of example.com</li>
+            <li><span>Aug 20, 2025</span> - Fact-check on viral video</li>
+            <li><span>Aug 19, 2025</span> - Is this text message a scam?</li> -->
+        </ul>
+      </div>
+
+      <!-- SETTINGS PAGE -->
+      <div class="page hidden" id="page-settings">
+        <p class="muted">Manage your profile and application settings here.</p>
+        <div class="settings-section">
+            <h3>Edit Profile</h3>
+            <p>Update your name and email.</p>
+        </div>
+         <div class="settings-section">
+            <h3>Theme</h3>
+            <p>Select your preferred interface theme.</p>
+            <div id="theme-switcher" class="row gap-8">
+                <button class="btn icon" data-theme="light" title="Light"><i data-lucide="sun"></i></button>
+                <button class="btn icon" data-theme="dark" title="Dark"><i data-lucide="moon"></i></button>
+                <button class="btn icon" data-theme="system" title="System"><i data-lucide="laptop"></i></button>
+            </div>
+        </div>
+        <div class="settings-section">
+            <h3>About</h3>
+            <p>Information about the application.</p>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</body>
+</html>
